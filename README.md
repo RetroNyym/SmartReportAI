@@ -50,6 +50,16 @@ Outlook Dağıtım (HTML şablon)
 | Dashboard | 🔜 | KPI kartları ve etkileşimli grafikler (PySide6 / CustomTkinter) |
 | Gelişmiş AI öngörüleri | 🔜 | Tahmin modelleri, mevsimsellik ve kök neden analizi |
 
+## Ekran görüntüleri
+
+Aşağıdaki görseller örnek veriyle üretilmiştir.
+
+![Veriden karara akış](docs/images/architecture.svg)
+
+| Grafik ve öngörüler | PDF rapor önizleme |
+|---|---|
+| ![Satış grafiği](docs/images/chart-sales.png) | ![PDF rapor sayfası](docs/images/report-preview-page1.png) |
+
 ## Proje yapısı
 
 ```
