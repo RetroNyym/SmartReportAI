@@ -146,6 +146,10 @@ Grafik için SQL'de ilk kolon kategori (ör. ay), ikinci kolon sayısal değer o
 
 Yapay zeka özeti için her raporun ilk 30 satırı OpenAI'ye gönderilir. Hassas veri içeren ortamlarda `OPENAI_API_KEY` boş bırakılarak AI özeti devre dışı bırakılabilir.
 
+## Lisans ve yazar
+
+Bu proje [MIT Lisansı](LICENSE) ile dağıtılmaktadır. Telif hakkı: **RetroNyym**.
+
 ## Yol haritası
 
 - [x] Veri → Excel → AI özet → Outlook akışı
