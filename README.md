@@ -148,7 +148,7 @@ Yapay zeka özeti için her raporun ilk 30 satırı OpenAI'ye gönderilir. Hassa
 
 ## Lisans ve yazar
 
-Bu proje [MIT Lisansı](LICENSE) ile dağıtılmaktadır. Telif hakkı: **RetroNyym**.
+Bu proje [MIT Lisansı](LICENSE) ile dağıtılmaktadır. Telif hakkı: **SmartReportAI Contributors** ve **RetroNyym**.
 
 ## Yol haritası
 
