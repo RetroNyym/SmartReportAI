@@ -1,0 +1,30 @@
+# Veritabanı bağlantıları. Değerler .env dosyasından okunur.
+connections:
+  main_sql:
+    type: sqlserver
+    server: ${SQL_SERVER}
+    database: ${SQL_DATABASE}
+    driver: ${SQL_DRIVER}
+    trusted: ${SQL_TRUSTED}
+    user: ${SQL_USER}
+    password: ${SQL_PASSWORD}
+
+  mysql_main:
+    type: mysql
+    host: ${MYSQL_HOST}
+    port: ${MYSQL_PORT}
+    database: ${MYSQL_DATABASE}
+    user: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+
+  postgres_main:
+    type: postgresql
+    host: ${PG_HOST}
+    port: ${PG_PORT}
+    database: ${PG_DATABASE}
+    user: ${PG_USER}
+    password: ${PG_PASSWORD}
+
+  local_sqlite:
+    type: sqlite
+    path: ${SQLITE_PATH}

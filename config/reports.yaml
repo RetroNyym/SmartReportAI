@@ -1,0 +1,23 @@
+# Rapor kayıtları (Query Manager).
+# chart: bar | line | pie | (boş bırakılırsa grafik yok)
+# insights: true ise veri üzerinde trend/anomali analizi yapılır
+reports:
+  - name: Satışlar
+    connection: main_sql
+    query: queries/sales.sql
+    chart: bar
+    insights: true
+
+  - name: Stok
+    connection: main_sql
+    query: queries/inventory.sql
+
+  - name: Cari Hesap
+    connection: main_sql
+    query: queries/receivables.sql
+
+  - name: Tahsilatlar
+    connection: main_sql
+    query: queries/collections.sql
+    chart: line
+    insights: true
