@@ -4,6 +4,7 @@ import sys
 
 from ai.insights import generate_insights
 from ai.summary import generate_summary
+from config.i18n import t
 from config.loader import load_connections, load_reports
 from config.settings import settings
 from database.base import read_query
@@ -23,14 +24,14 @@ def run(formats: list[str], send_mail: bool) -> None:
 
     results: list[ReportResult] = []
     for report in load_reports():
-        log.info("Veri çekiliyor: %s", report["name"])
+        log.info(t("log_fetch", name=report["name"]))
         df = read_query(connections[report["connection"]], report["query"])
         insights = generate_insights(df) if report.get("insights") else []
         results.append(
             ReportResult(name=report["name"], df=df, chart=report.get("chart"), insights=insights)
         )
 
-    log.info("AI özeti üretiliyor...")
+    log.info(t("log_ai"))
     summary = generate_summary(results)
 
     files = []
@@ -39,33 +40,33 @@ def run(formats: list[str], send_mail: bool) -> None:
     if "pdf" in formats:
         files.append(build_pdf(results, summary, settings.report_dir))
     for path in files:
-        log.info("Rapor hazır: %s", path)
+        log.info(t("log_ready", path=path))
 
     if send_mail:
-        log.info("Outlook ile gönderiliyor...")
+        log.info(t("log_sending"))
         send_report(files, summary, [r.name for r in results])
-        log.info("Mail gönderildi: %s", settings.mail_to)
+        log.info(t("log_sent", to=settings.mail_to))
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="SmartReportAI - tek tık raporlama")
-    parser.add_argument("--send", action="store_true", help="Raporu Outlook ile gönder")
+    parser = argparse.ArgumentParser(description=t("cli_description"))
+    parser.add_argument("--send", action="store_true", help=t("cli_send_help"))
     parser.add_argument(
         "--formats",
         default=",".join(FORMATS),
-        help="Çıktı formatları, virgülle ayrılmış: excel,pdf (varsayılan: ikisi)",
+        help=t("cli_formats_help"),
     )
     args = parser.parse_args()
 
     formats = [f.strip().lower() for f in args.formats.split(",") if f.strip()]
     unknown = set(formats) - set(FORMATS)
     if unknown:
-        parser.error(f"Bilinmeyen format: {', '.join(sorted(unknown))}")
+        parser.error(t("cli_unknown_format", formats=", ".join(sorted(unknown))))
 
     try:
         run(formats, send_mail=args.send)
     except Exception:
-        log.exception("Rapor oluşturulurken hata oluştu")
+        log.exception(t("log_failed"))
         return 1
     return 0
 

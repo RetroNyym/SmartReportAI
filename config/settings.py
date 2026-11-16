@@ -13,6 +13,8 @@ class Settings:
     openai_api_key: str = os.getenv("OPENAI_API_KEY", "")
     openai_model: str = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 
+    language: str = os.getenv("LANGUAGE", "tr").strip().lower()
+
     report_dir: Path = ROOT_DIR / os.getenv("REPORT_DIR", "output")
 
     mail_to: str = os.getenv("MAIL_TO", "")

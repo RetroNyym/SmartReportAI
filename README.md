@@ -3,12 +3,19 @@
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)](#kurulum)
+[![Languages](https://img.shields.io/badge/languages-TR%20%7C%20EN%20%7C%20FR%20%7C%20ES%20%7C%20IT%20%7C%20DE-orange.svg)](#dil-desteği)
+
+**SmartReportAI** is an open-source, AI-powered business reporting platform. It turns SQL Server, MySQL, PostgreSQL and SQLite data into automated **Excel and PDF reports** with **trend insights and executive summaries**, and delivers them by **Outlook email**. Reports and summaries are available in **Turkish, English, French, Spanish, Italian and German**.
+
+---
 
 **SmartReportAI**, SQL Server, MySQL, PostgreSQL ve SQLite verilerinizden otomatik **Excel ve PDF iş raporları** üreten, yapay zeka ile **trend analizi ve yönetici özeti** çıkaran, raporları **Outlook üzerinden e-posta ile** dağıtan açık kaynaklı bir Python platformudur.
 
 Veritabanlarınızdaki iş verisini tek tıkla anlamlı raporlara dönüştürür. Yalnızca veriyi Excel'e aktarmakla kalmaz: veriyi okur, düşüş, artış ve zirve gibi öngörüleri tespit eder, yöneticiler için özet hazırlar ve raporu doğrudan ilgili kişilere iletir.
 
-**Anahtar kelimeler:** otomatik rapor oluşturma, Excel rapor otomasyonu, PDF rapor, SQL Server raporlama, Python raporlama, Outlook otomatik mail, AI iş raporu, yapay zeka özeti, business intelligence, BI otomasyonu, veri öngörüsü, trend analizi, Query Manager.
+**Anahtar kelimeler:** otomatik rapor oluşturma, Excel rapor otomasyonu, PDF rapor, SQL Server raporlama, Python raporlama, Outlook otomatik mail, AI iş raporu, yapay zeka özeti, business intelligence, BI otomasyonu, veri öngörüsü, trend analizi, Query Manager, çok dilli rapor, çok dilli AI özeti.
+
+**Keywords:** automated reporting, multilingual reports, multi-language business intelligence, AI report generator, Excel and PDF report automation, SQL Server reporting, Python reporting, Outlook email reports, trend analysis, executive summary, rapports multilingues, informes multilingües, report multilingue, mehrsprachige Berichte.
 
 ## Neden SmartReportAI?
 
@@ -47,6 +54,7 @@ Outlook Dağıtım (HTML şablon)
 | Excel çıktısı | ✅ | Biçimlendirilmiş tablo ve yerel Excel grafikleri |
 | PDF çıktısı | ✅ | Grafik, öngörü ve tablolu PDF rapor |
 | E-posta dağıtımı | ✅ | Outlook, HTML şablon, otomatik ekler |
+| Çoklu dil | ✅ | Türkçe, English, Français, Español, Italiano, Deutsch |
 | Dashboard | 🔜 | KPI kartları ve etkileşimli grafikler (PySide6 / CustomTkinter) |
 | Gelişmiş AI öngörüleri | 🔜 | Tahmin modelleri, mevsimsellik ve kök neden analizi |
 
@@ -141,6 +149,21 @@ Grafik için SQL'de ilk kolon kategori (ör. ay), ikinci kolon sayısal değer o
 ## E-posta şablonu
 
 `templates/email.html` dosyasını düzenleyerek mail gövdesini özelleştirebilirsiniz. Kullanılabilir alanlar: `$date`, `$report_names`, `$summary`. Farklı bir şablon için `.env` içinde `MAIL_TEMPLATE` değerini değiştirin.
+
+## Dil desteği
+
+`.env` dosyasındaki `LANGUAGE` değişkeni ile rapor, öngörü, AI özeti, mail ve konsol çıktılarının dili seçilir:
+
+| Kod | Dil |
+| --- | --- |
+| `tr` | Türkçe (varsayılan) |
+| `en` | English |
+| `fr` | Français |
+| `es` | Español |
+| `it` | Italiano |
+| `de` | Deutsch |
+
+Sayı ve tarih biçimleri de seçilen dile göre uyarlanır. AI özeti de seçilen dilde üretilir.
 
 ## Gizlilik notu
 

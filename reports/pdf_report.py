@@ -24,6 +24,8 @@ from reportlab.platypus import (  # noqa: E402
     TableStyle,
 )
 
+from config.i18n import fmt_datetime, fmt_number, t
+
 from .models import ReportResult
 
 MAX_TABLE_ROWS = 40
@@ -46,8 +48,7 @@ def _format_value(value) -> str:
     if value is None or (isinstance(value, float) and pd.isna(value)):
         return ""
     if isinstance(value, float):
-        text = f"{value:,.2f}"
-        return text.replace(",", "X").replace(".", ",").replace("X", ".")
+        return fmt_number(value, decimals=2)
     return str(value)
 
 
@@ -99,7 +100,7 @@ def _table(df: pd.DataFrame, font: str, bold: str) -> list:
     )
     flowables = [table]
     if len(df) > MAX_TABLE_ROWS:
-        note = f"Tabloda ilk {MAX_TABLE_ROWS} satır gösterilmektedir (toplam {len(df)}). Tüm veri için Excel çıktısını kullanın."
+        note = t("truncated_note", max_rows=MAX_TABLE_ROWS, total=len(df))
         flowables.append(Paragraph(escape(note), ParagraphStyle("note", fontName=font, fontSize=8)))
     return flowables
 
@@ -112,10 +113,10 @@ def build_pdf(results: list[ReportResult], summary_text: str, output_dir: Path) 
     body_style = ParagraphStyle("body", parent=base["BodyText"], fontName=font, fontSize=10, leading=14)
 
     story = [
-        Paragraph("SmartReportAI Raporu", title_style),
-        Paragraph(f"Oluşturulma: {datetime.now():%d.%m.%Y %H:%M}", body_style),
+        Paragraph(t("app_title"), title_style),
+        Paragraph(f"{t('generated_at')}: {fmt_datetime(datetime.now(), with_time=True)}", body_style),
         Spacer(1, 12),
-        Paragraph("AI Özeti", h2_style),
+        Paragraph(t("ai_summary"), h2_style),
     ]
     for line in summary_text.split("\n"):
         if line.strip():
