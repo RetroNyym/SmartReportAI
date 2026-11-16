@@ -142,6 +142,21 @@ Grafik için SQL'de ilk kolon kategori (ör. ay), ikinci kolon sayısal değer o
 
 `templates/email.html` dosyasını düzenleyerek mail gövdesini özelleştirebilirsiniz. Kullanılabilir alanlar: `$date`, `$report_names`, `$summary`. Farklı bir şablon için `.env` içinde `MAIL_TEMPLATE` değerini değiştirin.
 
+## Dil desteği
+
+`.env` dosyasındaki `LANGUAGE` değişkeni ile rapor, öngörü, AI özeti, mail ve konsol çıktılarının dili seçilir:
+
+| Kod | Dil |
+| --- | --- |
+| `tr` | Türkçe (varsayılan) |
+| `en` | English |
+| `fr` | Français |
+| `es` | Español |
+| `it` | Italiano |
+| `de` | Deutsch |
+
+Sayı ve tarih biçimleri de seçilen dile göre uyarlanır. AI özeti de seçilen dilde üretilir.
+
 ## Gizlilik notu
 
 Yapay zeka özeti için her raporun ilk 30 satırı OpenAI'ye gönderilir. Hassas veri içeren ortamlarda `OPENAI_API_KEY` boş bırakılarak AI özeti devre dışı bırakılabilir.

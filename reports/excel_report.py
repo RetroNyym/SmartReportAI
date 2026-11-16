@@ -7,6 +7,8 @@ from openpyxl.chart import BarChart, LineChart, PieChart, Reference
 from openpyxl.styles import Alignment, Font, PatternFill
 from openpyxl.utils import get_column_letter
 
+from config.i18n import fmt_datetime, t
+
 from .models import ReportResult
 
 HEADER_FILL = PatternFill("solid", fgColor="1F4E78")
@@ -58,11 +60,11 @@ def build_excel(results: list[ReportResult], summary_text: str, output_dir: Path
     wb = Workbook()
 
     summary_ws = wb.active
-    summary_ws.title = "Özet"
-    summary_ws["A1"] = "SmartReportAI Raporu"
+    summary_ws.title = t("sheet_summary")
+    summary_ws["A1"] = t("app_title")
     summary_ws["A1"].font = Font(bold=True, size=16, color="1F4E78")
-    summary_ws["A2"] = f"Oluşturulma: {datetime.now():%d.%m.%Y %H:%M}"
-    summary_ws["A4"] = "AI Özeti"
+    summary_ws["A2"] = f"{t('generated_at')}: {fmt_datetime(datetime.now(), with_time=True)}"
+    summary_ws["A4"] = t("ai_summary")
     summary_ws["A4"].font = Font(bold=True, size=12)
     summary_ws["A5"] = summary_text
     summary_ws["A5"].alignment = Alignment(wrap_text=True, vertical="top")
@@ -72,7 +74,7 @@ def build_excel(results: list[ReportResult], summary_text: str, output_dir: Path
     row = 22
     insight_lines = [(r.name, line) for r in results for line in r.insights]
     if insight_lines:
-        summary_ws.cell(row=row, column=1, value="Öngörüler").font = Font(bold=True, size=12)
+        summary_ws.cell(row=row, column=1, value=t("insights_title")).font = Font(bold=True, size=12)
         row += 1
         for name, line in insight_lines:
             summary_ws.cell(row=row, column=1, value=f"{name}: {line}")

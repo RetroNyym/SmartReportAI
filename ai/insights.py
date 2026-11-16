@@ -1,11 +1,9 @@
 import pandas as pd
 
+from config.i18n import fmt_number, t
+
 CHANGE_THRESHOLD_PCT = 20.0
 COMPARE_PERIODS = 3
-
-
-def _fmt(value: float) -> str:
-    return f"{value:,.0f}".replace(",", ".")
 
 
 def generate_insights(df: pd.DataFrame) -> list[str]:
@@ -29,15 +27,20 @@ def generate_insights(df: pd.DataFrame) -> list[str]:
     if baseline != 0:
         change = (last_value - baseline) / abs(baseline) * 100
         if abs(change) >= CHANGE_THRESHOLD_PCT:
-            direction = "düşüş" if change < 0 else "artış"
+            direction = t("insight_drop") if change < 0 else t("insight_rise")
             lines.append(
-                f"{last_label} döneminde değer, önceki {COMPARE_PERIODS} dönemin ortalamasına göre "
-                f"%{abs(change):.0f} {direction} gösterdi."
+                t(
+                    "insight_change",
+                    label=last_label,
+                    periods=COMPARE_PERIODS,
+                    pct=f"{abs(change):.0f}",
+                    direction=direction,
+                )
             )
             if change <= -CHANGE_THRESHOLD_PCT:
-                lines.append("İncelenmesi önerilir.")
+                lines.append(t("insight_review"))
 
     peak_index = max(range(len(values)), key=lambda i: values[i])
-    lines.append(f"En yüksek değer {labels[peak_index]} döneminde ({_fmt(values[peak_index])}) gerçekleşti.")
+    lines.append(t("insight_peak", label=labels[peak_index], value=fmt_number(values[peak_index])))
 
     return lines

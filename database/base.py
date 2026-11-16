@@ -4,6 +4,8 @@ import pandas as pd
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
 
+from config.i18n import t
+
 from . import mysql, postgresql, sqlite, sqlserver
 
 URL_BUILDERS = {
@@ -17,7 +19,7 @@ URL_BUILDERS = {
 def get_engine(conn_cfg: dict) -> Engine:
     db_type = conn_cfg["type"]
     if db_type not in URL_BUILDERS:
-        raise ValueError(f"Desteklenmeyen veritabanı türü: {db_type}")
+        raise ValueError(t("err_db_type", db_type=db_type))
     return create_engine(URL_BUILDERS[db_type](conn_cfg), pool_pre_ping=True)
 
 
